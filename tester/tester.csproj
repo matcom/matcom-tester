@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\tester\tester.csproj" />
+    <ProjectReference Include="..\code\code.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
