@@ -56,7 +56,7 @@ public abstract class TesterBase<TArg, TIn, TOut>
 
     public abstract TOut OutputGenerator(TIn input);
 
-    public abstract bool OutputChecker(TIn input, TOut output, TOut otherOutput);
+    public abstract bool OutputChecker(TIn input, TOut output, TOut expectedOutput);
 
     public void GenerateResponses(int baseSeed, TArg param, string cacheFilename, int numTests = 100)
     {
