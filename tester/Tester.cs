@@ -1,5 +1,3 @@
-using System;
-
 namespace MatCom.Tester;
 
 public class Tester : TesterBase<int, int, int>
@@ -10,7 +8,7 @@ public class Tester : TesterBase<int, int, int>
         return random.Next(0, arg);
     }
 
-    public override bool OutputChecker(int output, int otherOutput)
+    public override bool OutputChecker(int input, int output, int otherOutput)
     {
         return output == otherOutput;
     }

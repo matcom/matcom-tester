@@ -56,7 +56,7 @@ public abstract class TesterBase<TArg, TIn, TOut>
 
     public abstract TOut OutputGenerator(TIn input);
 
-    public abstract bool OutputChecker(TOut output, TOut otherOutput);
+    public abstract bool OutputChecker(TIn input, TOut output, TOut otherOutput);
 
     public void GenerateResponses(int baseSeed, TArg param, string cacheFilename, int numTests = 100)
     {
@@ -99,7 +99,7 @@ public abstract class TesterBase<TArg, TIn, TOut>
             {
                 try
                 {
-                    return OutputChecker(func(input), caseCache.Output) ? ResultType.Ok : ResultType.Wrong;
+                    return OutputChecker(input, func(input), caseCache.Output) ? ResultType.Ok : ResultType.Wrong;
                 }
                 catch (Exception)
                 {
