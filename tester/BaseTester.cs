@@ -34,9 +34,9 @@ public class TestResult
     }
 }
 
-public class CaseCache<TIn, TOut>
+public class CaseCache<TIn, TEOut>
 {
-    public CaseCache(int seed, long time, TIn input, TOut output)
+    public CaseCache(int seed, long time, TIn input, TEOut output)
     {
         Seed = seed;
         Time = time;
@@ -47,16 +47,16 @@ public class CaseCache<TIn, TOut>
     public int Seed { get; set; }
     public long Time { get; set; }
     public TIn Input { get; set; }
-    public TOut Output { get; set; }
+    public TEOut Output { get; set; }
 }
 
-public abstract class TesterBase<TArg, TIn, TOut>
+public abstract class TesterBase<TArg, TIn, TOut, TEOut>
 {
     public abstract TIn InputGenerator(int seed, TArg arg);
 
-    public abstract TOut OutputGenerator(TIn input);
+    public abstract TEOut OutputGenerator(TIn input);
 
-    public abstract bool OutputChecker(TIn input, TOut output, TOut expectedOutput);
+    public abstract bool OutputChecker(TIn input, TOut output, TEOut expectedOutput);
 
     public void GenerateResponses(int baseSeed, TArg param, string cacheFilename, int numTests = 100)
     {
@@ -64,18 +64,18 @@ public abstract class TesterBase<TArg, TIn, TOut>
         {
             return;
         }
-        var responses = new List<CaseCache<TIn, TOut>>();
+        var responses = new List<CaseCache<TIn, TEOut>>();
         for (var s = 0; s < numTests; ++s)
         {
             var seed = baseSeed + s;
             var input = InputGenerator(seed, param);
-            (var output, var time) = RunTask(OutputGenerator, input, default(TOut));
+            (var output, var time) = RunTask(OutputGenerator, input, default(TEOut));
             if (output is null)
             {
                 Console.WriteLine($"Timeout generating output for seed {seed} and input {input}");
                 continue;
             }
-            var caseCache = new CaseCache<TIn, TOut>(seed, time, input, output);
+            var caseCache = new CaseCache<TIn, TEOut>(seed, time, input, output);
             responses.Add(caseCache);
         }
         File.WriteAllText(cacheFilename, JsonSerializer.Serialize(responses.ToArray()));
@@ -85,7 +85,7 @@ public abstract class TesterBase<TArg, TIn, TOut>
     {
         var testResult = new TestResult();
 
-        var cache = JsonSerializer.Deserialize<List<CaseCache<TIn, TOut>>>(File.ReadAllText(cacheFilename));
+        var cache = JsonSerializer.Deserialize<List<CaseCache<TIn, TEOut>>>(File.ReadAllText(cacheFilename));
         if (cache is null)
         {
             Console.WriteLine($"Failed to deserialize cache file {cacheFilename}");

@@ -1,6 +1,6 @@
 namespace MatCom.Tester;
 
-public class Tester : TesterBase<int, int, int>
+public class Tester : TesterBase<int, int, int, int>
 {
     public override int InputGenerator(int seed, int arg)
     {
