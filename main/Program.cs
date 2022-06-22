@@ -19,7 +19,7 @@ foreach (var solution in Directory.GetFiles("solutions", "*.cs"))
     foreach (var oldFile in oldFiles) File.Delete(oldFile);
     File.Copy(solution, Path.Combine("code", "Solution.cs"));
     var name = Path.GetFileNameWithoutExtension(solution);
-    var info = new ProcessStartInfo("cmd.exe", "/C dotnet run --project tester");
+    var info = new ProcessStartInfo("dotnet", "run --project tester");
     var process = Process.Start(info);
     process?.WaitForExit();
     if (process?.ExitCode != 0)
