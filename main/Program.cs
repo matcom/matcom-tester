@@ -6,7 +6,7 @@ Directory.CreateDirectory(".output");
 File.Delete(Path.Combine(".output", "result.md"));
 File.WriteAllLines(Path.Combine(".output", "result.md"), new[]
 {
-    "# Results of MatCom Programming Contest #1",
+    "# Results of MatCom Programming Test #1 - Afternoon",
     "",
     "| Student name | Result | 👌 | 👎 | 💥 | ⏰ |",
     "| ------------ | ------ | -- | -- | --- | -- |",

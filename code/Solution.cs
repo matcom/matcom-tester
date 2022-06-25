@@ -1,11 +1,10 @@
-namespace MatCom.Examen;
-
-public class Solution
+﻿namespace Weboo.Examen
 {
-    public static int Solve(int n)
+    public static class Solucion
     {
-        if (n % 2 == 0)
-            return n + 2;
-        return n * 2;
+        public static int[] MejorRotacion(int[] numeros)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
